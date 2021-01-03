@@ -1,0 +1,5 @@
+{
+  "mongoUri": "mongodb+srv://Artem:123qweasd@cluster0.zhdag.mongodb.net/dashboard?retryWrites=true&w=majority",
+  "port": 5000,
+  "jwtSecret": "paOQaJiQFKCsvA4nCKVZ9bvpNfr6onfmk79LABMbgCCddYTGewdangM6vno5Myoo"
+}

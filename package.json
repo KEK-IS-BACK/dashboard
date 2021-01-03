@@ -1,0 +1,36 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "description": "Simple dashboard",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KEK-IS-BACK/dashboard.git"
+  },
+  "keywords": [
+    "React",
+    "React-Redux",
+    "Frontend"
+  ],
+  "author": "Artem Gadkov <artem.gladkovw@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KEK-IS-BACK/dashboard/issues"
+  },
+  "homepage": "https://github.com/KEK-IS-BACK/dashboard#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.3",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
