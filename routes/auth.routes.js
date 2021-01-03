@@ -84,7 +84,7 @@ router.post(
         {expiresIn: '1h'}
       )
 
-      response.json({token, userId: user.id, userEmail: user.email})
+      response.json({token, userId: user.id})
     } catch (e) {
       response.status(500).json({message: 'Ошибка на сервере'})
     }
