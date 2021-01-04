@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const Users = require('../models/User')
+const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const {body, validationResult} = require('express-validator')
 const jwt = require('jsonwebtoken')
@@ -13,13 +13,13 @@ router.post(
   [
     body('email', 'Введен некоректный Email').isEmail(),
     body('password', 'Минимальная длина пароля 6 символов').isLength({min: 6}),
-    body('fullName', 'Введите имя и фамилию').not().isEmpty().trim().escape(),
+    body('fullName', 'Введите ФИО').not().isEmpty().trim().escape(),
   ],
   async (request, response) => {
     try {
       const errors = validationResult(request)
 
-      if (errors) {
+      if (!errors.isEmpty()) {
         return response.status(400).json({
           errors: errors.array(),
           message: 'Некоректные данные при регистрации'
@@ -28,18 +28,19 @@ router.post(
 
       const {email, password, fullName} = request.body
 
-      const candidate = await Users.findOne({email})
+      const candidate = await User.findOne({email})
 
       if (candidate) {
         return response.status(400).json({message: 'Пользователь с таким Email уже существует'})
       }
 
       const hashedPassword = await bcrypt.hash(password, 12)
+
       const user = new User({email, password: hashedPassword, fullName})
 
       await user.save()
 
-      return response.json({message: 'Новый пользователь создан'})
+      return response.status(201).json({message: 'Новый пользователь создан'})
     } catch (e) {
       response.status(500).json({message: 'Ошибка на сервере'})
     }
@@ -57,7 +58,7 @@ router.post(
     try {
       const errors = validationResult(request)
 
-      if (errors) {
+      if (!errors.isEmpty()) {
         return response.status(400).json({
           errors: errors.array(),
           message: 'Некоректные данные при входе'
@@ -66,7 +67,7 @@ router.post(
 
       const {email, password} = request.body
 
-      const user = await Users.findOne({email})
+      const user = await User.findOne({email})
 
       if (!user) {
         return response.status(400).json({message: 'Пользователь с таким Email не найден'})
@@ -84,7 +85,7 @@ router.post(
         {expiresIn: '1h'}
       )
 
-      response.json({token, userId: user.id})
+      response.json({token, userId: user.id, fullName: user.fullName})
     } catch (e) {
       response.status(500).json({message: 'Ошибка на сервере'})
     }
