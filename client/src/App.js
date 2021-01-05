@@ -1,20 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Header from "./components/Header/Header";
 import useRoutes from "./hooks/routes";
-import {getIsAuth} from "./redux/selectors";
+import {getIsAppInitialized, getIsAuth} from "./redux/selectors";
 import {connect} from 'react-redux'
 import {getOwnerData} from "./redux/authReducer";
 import './App.scss';
-import useInitial from "./hooks/initial-hook";
 import Preloader from "./components/common/Preloader/Preloader";
+import {initializeMyApp} from "./redux/initialReducer";
 
 
 const App = props => {
-  const {isAuth} = props
-  const isInitialized = useInitial(isAuth)
+  const {isAuth, isAppInitialized, initializeMyApp} = props
+
   const routes = useRoutes(isAuth)
 
-  if(!isInitialized) return <Preloader/>
+  useEffect(() => {
+    initializeMyApp()
+  }, [initializeMyApp])
+
+  if(!isAppInitialized) return <Preloader/>
 
   return (
     <div className="app">
@@ -25,7 +29,8 @@ const App = props => {
 }
 
 const mapStateToProps = state => ({
-  isAuth: getIsAuth(state)
+  isAuth: getIsAuth(state),
+  isAppInitialized: getIsAppInitialized(state)
 })
 
-export default connect(mapStateToProps, {getOwnerData})(App);
+export default connect(mapStateToProps, {getOwnerData, initializeMyApp})(App);

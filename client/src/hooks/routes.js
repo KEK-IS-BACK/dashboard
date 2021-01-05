@@ -3,8 +3,8 @@ import {Redirect, Route, Switch} from 'react-router-dom'
 import Registration from "../components/Registration/Registration";
 import Login from "../components/Login/Login";
 import Navbar from "../components/Navbar/Navbar";
-import Settings from "../pages/Settings/Settings";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import DashboardPage from "../pages/DashboardPage/DashboardPage";
+import SettingsPage from "../pages/SettingsPage/SettingsPage";
 
 const useRoutes = (isAuth) => {
   if (isAuth) {
@@ -12,8 +12,8 @@ const useRoutes = (isAuth) => {
       <>
         <Navbar/>
         <Switch>
-          <Route path='/settings' component={Settings}/>
-          <Route exact path='/' component={Dashboard}/>
+          <Route path='/settings' component={SettingsPage}/>
+          <Route exact path='/' component={DashboardPage}/>
           <Redirect to='/'/>
         </Switch>
       </>

@@ -1,7 +1,7 @@
 import * as axios from "axios";
 
 
-let instance = setInstanceWithToken()
+let instanceWithToken = setInstanceWithToken()
 
 function setInstanceWithToken(token = null) {
   const userToken = token || localStorage.getItem('userToken')
@@ -28,9 +28,10 @@ export const authApi = {
   async login(email, password) {
     try {
       const response = await axios.post('api/auth/login', {email, password})
-      console.log(response)
+
       if (response.status === 200) {
         localStorage.setItem('userToken', response.data.token)
+        instanceWithToken = setInstanceWithToken(response.data.token)
       }
 
       return response.data
@@ -43,9 +44,42 @@ export const authApi = {
 export const profileApi = {
   async getOwnerProfile() {
     try {
-      const response = await instance.get('profile/')
+      const response = await instanceWithToken.get('profile/')
 
       return response.data
-    } catch (e) {}
+    } catch (e) {
+    }
+  }
+}
+
+export const usersApi = {
+  async createUser(fullName, aboutMe, phone, place) {
+    try {
+      const response = await instanceWithToken.post('users/create', {fullName, aboutMe, phone, place})
+
+      return response.data
+    } catch (e) {
+      return e.response.data
+    }
+  },
+
+  async getUsers() {
+    try {
+      const response = await instanceWithToken.get('users/')
+
+      return response.data
+    } catch (e) {
+      return e.response.data
+    }
+  },
+
+  async deleteUser(userId) {
+    try {
+      const response = await instanceWithToken.delete(`/users/${userId}`)
+
+      return response.data
+    } catch (e) {
+      return e.response.data
+    }
   }
 }

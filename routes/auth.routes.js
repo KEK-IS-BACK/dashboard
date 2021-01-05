@@ -70,7 +70,7 @@ router.post(
       const user = await User.findOne({email})
 
       if (!user) {
-        return response.status(400).json({message: 'Пользователь с таким Email не найден'})
+        return response.status(400).json({errors: [{msg: 'Пользователь с таким Email не найден'}]})
       }
 
       const isMatch = await bcrypt.compare(password, user.password)
@@ -82,7 +82,7 @@ router.post(
       const token = jwt.sign(
         {userId: user.id},
         config.get('jwtSecret'),
-        {expiresIn: '1h'}
+        {expiresIn: '12h'}
       )
 
       response.json({token, userId: user.id, fullName: user.fullName})

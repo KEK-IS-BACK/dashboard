@@ -1,4 +1,5 @@
 import {authApi, profileApi} from "../api/api";
+import {deleteActiveUser, getUsers, setUsers} from "./settingsPageReducer";
 
 const SET_OWNER_DATA = 'dashboard/auth/SET_OWNER_DATA'
 const LOGOUT = 'dashboard/auth/LOGOUT'
@@ -63,18 +64,24 @@ export const signIn = (email, password) => async dispatch => {
       return
     }
 
-    dispatch(setOwnerData(email, password))
+    await dispatch(setOwnerData(email, password))
+    await dispatch(getUsers())
+
   } catch (e) {}
 }
 export const getOwnerData = () => async dispatch => {
   try {
-    const data = profileApi.getOwnerProfile()
+    const data = await profileApi.getOwnerProfile()
 
     dispatch(setOwnerData(data.id, data.fullName))
   } catch (e) {}
 }
 export const logout = () => dispatch => {
   localStorage.removeItem('userToken')
+  localStorage.removeItem('activeUserId')
+
+  dispatch(setUsers([])) //Очистка пользователей при выходе
+  dispatch(deleteActiveUser()) //Очистка пользователей при выходе
   dispatch({type: LOGOUT})
 }
 

@@ -4,16 +4,19 @@ import {NavLink} from "react-router-dom";
 import Account from "./Account/Account";
 import {connect} from "react-redux";
 import './Header.scss'
-import {getIsAuth} from "../../redux/selectors";
+import {getActiveUser, getIsAuth, getSettingsPageUsers} from "../../redux/selectors";
+import WidgetUsers from "./WidgetUsers/WidgetUsers";
+
 
 const Header = (props) => {
-  const {isAuth} = props
+  const {isAuth, users, activeUser} = props
 
   return (
     <header className='header'>
       <div className="container">
         <div className='header__body'>
           <Logo/>
+          <WidgetUsers users={users} activeUser={activeUser}/>
           {isAuth
             ? <Account/>
             : <div className='header__buttons'>
@@ -27,7 +30,9 @@ const Header = (props) => {
 }
 
 const mapStateToProps = state => ({
-  isAuth: getIsAuth(state)
+  isAuth: getIsAuth(state),
+  users: getSettingsPageUsers(state),
+  activeUser: getActiveUser(state)
 })
 
 export default connect(mapStateToProps)(Header)
