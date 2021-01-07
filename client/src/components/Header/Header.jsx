@@ -16,13 +16,15 @@ const Header = (props) => {
       <div className="container">
         <div className='header__body'>
           <Logo/>
-          <WidgetUsers users={users} activeUser={activeUser}/>
           {isAuth
-            ? <Account/>
+            ? <>
+              <WidgetUsers users={users} activeUser={activeUser}/>
+              <Account/>
+            </>
             : <div className='header__buttons'>
-                <NavLink className='header__link' to='/registration'>Зарегистрироваться</NavLink>
-                <NavLink className='header__link' to='/login'>Войти</NavLink>
-              </div>}
+              <NavLink className='header__link' to='/registration'>Зарегистрироваться</NavLink>
+              <NavLink className='header__link' to='/login'>Войти</NavLink>
+            </div>}
         </div>
       </div>
     </header>

@@ -1,5 +1,5 @@
 import {getOwnerData} from "./authReducer";
-import {setActiveUser} from "./settingsPageReducer";
+import {getUsers, setActiveUser} from "./settingsPageReducer";
 
 const SET_INITIALIZE_APP = 'dashboard/initialReducer/SET_INITIALIZE_APP'
 
@@ -24,8 +24,9 @@ const setInitializeApp = () => ({type: SET_INITIALIZE_APP})
 export const initializeMyApp = () => async (dispatch, getState) => {
   const state = getState()
 
-  if (!state.auth.isAuth && localStorage.getItem('userToken')) {
+  if (!state.auth.isAuth && localStorage.getItem('userToken')) {  //Если есть токен, то авторизовать пользователя и получить нужные данные
     await dispatch(getOwnerData())
+    await dispatch(getUsers())
   }
 
   const activeUserId = localStorage.getItem('activeUserId')

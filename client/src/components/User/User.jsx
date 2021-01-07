@@ -1,16 +1,24 @@
 import './User.scss'
+import defaultAvatar from '../../assets/img/jpg/default_avatar.jpg';
 
 const User = props => {
   const {fullName, aboutMe, phone, place, _id: id, deleteUser, selectActiveUser, activeUser} = props
 
   return (
     <div className={`user ${activeUser._id === id ? 'active' : ''}`}>
-      <div className='user__fullName'>{fullName}</div>
-      <div className='user__aboutMe'>{aboutMe}</div>
-      <div className='user__phone'>{phone}</div>
-      <div className='user__place'>{place}</div>
-      <button onClick={() => {selectActiveUser(id)}}>Выбрать пользователя</button>
-      <button onClick={()=>{deleteUser(id)}}>{'Удалить пользователя с ID' + id}</button>
+      <div className='user__img' onClick={() => {selectActiveUser(id)}}>
+        <img src={defaultAvatar} alt=""/>
+      </div>
+      <div className='user__info'>
+        <div className='user__fullName subtitle' onClick={() => {selectActiveUser(id)}}>{fullName}</div>
+        <div className='user__aboutMe'>О себе: {aboutMe}</div>
+        <div className='user__phone'>Номер телефона: {phone}</div>
+        <div className='user__place'>Город: {place}</div>
+      </div>
+      <div onClick={() => {
+        deleteUser(id)
+      }} className='user__btnDelete'>x
+      </div>
     </div>
   )
 }

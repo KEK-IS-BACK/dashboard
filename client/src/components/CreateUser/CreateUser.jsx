@@ -25,6 +25,7 @@ const CreateUser = props => {
 
   return (
     <div className='createUser'>
+      <h1 className='subtitle createUser__title'>Добавить пользователя</h1>
       <form onSubmit={submitHandler}>
         <div className='createUser__body'>
           <label>

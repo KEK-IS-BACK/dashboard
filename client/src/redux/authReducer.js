@@ -1,4 +1,4 @@
-import {authApi, profileApi} from "../api/api";
+import {authApi, profileApi} from "../api/mainApi";
 import {deleteActiveUser, getUsers, setUsers} from "./settingsPageReducer";
 
 const SET_OWNER_DATA = 'dashboard/auth/SET_OWNER_DATA'

@@ -1,4 +1,14 @@
+@import "../../assets/scss/vars";
+
 .createUser{
+  background-color: $whiteColor;
+  border-radius: 5px;
+  grid-column: 2 / 3;
+  padding: 15px;
+  box-sizing: border-box;
+  &__title{
+    padding: 0 0 15px 0;
+  }
   &__body{
     display: grid;
     gap: 10px;

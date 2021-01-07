@@ -1,4 +1,5 @@
-import {usersApi} from "../api/api";
+import {usersApi} from "../api/mainApi";
+import defaultAvatar from '../assets/img/jpg/default_avatar.jpg'
 
 const SET_USERS = 'dashboard/settingsPage/SET_USERS'
 const SET_ACTIVE_USER = 'dashboard/settingsPage/SET_ACTIVE_USER'
@@ -6,7 +7,8 @@ const DELETE_ACTIVE_USER = 'dashboard/settingsPage/DELETE_ACTIVE_USER'
 
 const initialState = {
   users: [],
-  activeUser: {}
+  activeUser: {},
+  defaultAvatar: defaultAvatar
 }
 
 const settingsPageReducer = (state = initialState, action) => {

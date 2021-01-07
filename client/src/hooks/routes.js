@@ -5,14 +5,17 @@ import Login from "../components/Login/Login";
 import Navbar from "../components/Navbar/Navbar";
 import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import SettingsPage from "../pages/SettingsPage/SettingsPage";
+import DetailsPage from "../pages/DetailsPage/DetailsPage";
 
 const useRoutes = (isAuth) => {
+
   if (isAuth) {
     return (
       <>
         <Navbar/>
         <Switch>
           <Route path='/settings' component={SettingsPage}/>
+          <Route path='/details' component={DetailsPage}/>
           <Route exact path='/' component={DashboardPage}/>
           <Redirect to='/'/>
         </Switch>

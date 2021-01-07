@@ -1,34 +1,18 @@
 import './DashboardPage.scss'
 import ApiCard from "../../components/ApiCard/ApiCard";
+import {getApiCards} from "../../redux/selectors";
+import {connect} from 'react-redux'
+import {setApiResult} from "../../redux/apiCardsRedecer";
 
 const DashboardPage = props => {
-  // let {cards} = props
+  let {cards, setApiResult} = props
 
-  const cards = [
-    {
-      title: 'Youtube',
-      description: 'После нажатия на карточку получаешь набор случайных видео',
-      link: '/somewhere',
-      img: null
-    }, {
-      title: 'Youtube',
-      description: 'После нажатия на карточку получаешь набор случайных видео',
-      link: '/somewhere',
-      img: null
-    }, {
-      title: 'Youtube',
-      description: 'После нажатия на карточку получаешь набор случайных видео',
-      link: '/somewhere',
-      img: null
-    }
-  ]
-
-  const cardsElements = cards.map((card, index) => <ApiCard key={index} {...card}/>)
+  const cardsElements = cards.map((card, index) => <ApiCard key={index} {...card} setApiResult={setApiResult}/>)
 
   return (
     <div className='dashboardPage'>
       <div className="container">
-        <h1 className='dashboardPage__title'>Dashboard Page</h1>
+        <h1 className='title dashboardPage__title'>Dashboard Page</h1>
         <div className='dashboardPage__cards'>
           {cardsElements}
         </div>
@@ -37,4 +21,8 @@ const DashboardPage = props => {
   )
 }
 
-export default DashboardPage
+const mapStateToProps = state => ({
+  cards: getApiCards(state)
+})
+
+export default connect(mapStateToProps, {setApiResult})(DashboardPage)

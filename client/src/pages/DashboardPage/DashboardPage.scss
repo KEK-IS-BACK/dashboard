@@ -1,7 +1,10 @@
 .dashboardPage{
+  &__title{
+    padding: 15px 0;
+  }
   &__cards{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
+    gap: 25px;
   }
 }

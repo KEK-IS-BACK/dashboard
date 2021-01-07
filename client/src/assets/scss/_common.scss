@@ -34,6 +34,31 @@ a{
   padding: 0 10px;
 }
 
-.lock{
-  overflow: hidden;
+.title{
+  font-size: $titleFontSize;
+  font-weight: $titleFontWeight;
+  color: $titleFontColor;
+  line-height: $titleLineHeight;
+}
+
+.subtitle{
+  font-size: $subtitleFontSize;
+  font-weight: $subtitleFontWeight;
+  color: $subtitleFontColor;
+  line-height: $subtitleLineHeight;
+}
+
+::-webkit-scrollbar{
+  width: 8px;
+}
+
+::-webkit-scrollbar-track{
+  background-color: $lightColor;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb{
+  border: 2px solid $lightColor;
+  background-color: rgba(189,189,189,1);
+  border-radius: 5px;
 }
