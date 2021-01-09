@@ -1,5 +1,7 @@
 import './CreateUser.scss'
 import {useState} from "react";
+import Input from "../common/Input/Input";
+import Button from "../common/Button/Button";
 
 const CreateUser = props => {
   const {createUser} = props
@@ -21,6 +23,12 @@ const CreateUser = props => {
   const submitHandler = e => {
     e.preventDefault()
     createUser(form)
+    setForm({
+      fullName: '',
+      aboutMe: '',
+      phone: '',
+      place: ''
+    })
   }
 
   return (
@@ -28,47 +36,55 @@ const CreateUser = props => {
       <h1 className='subtitle createUser__title'>Добавить пользователя</h1>
       <form onSubmit={submitHandler}>
         <div className='createUser__body'>
-          <label>
-            ФИО:
-            <input type="text"
+          <label className='createUser__label'>
+            <div className='createUser__property'>ФИО:</div>
+
+            <Input type="text"
                    placeholder='Иванов Иван Иванович'
                    name='fullName'
                    value={form.fullName}
                    onChange={onChangeHandler}
             />
           </label>
-          <label>
-            О себе:
+          <label className='createUser__label'>
+            <div className='createUser__property'>О себе:</div>
             <textarea placeholder='Например, "Ответственный и жизнерадостный :)"'
+                      className='createUser__aboutMe'
                       name='aboutMe'
                       value={form.aboutMe}
                       onChange={onChangeHandler}/>
           </label>
-          <label>
-            Номер телефона:
-            <input type="text"
+          <label className='createUser__label'>
+            <div className='createUser__property'>Номер телефона:</div>
+            <Input type="text"
                    placeholder='88005353535'
                    name='phone'
                    value={form.phone}
                    onChange={onChangeHandler}/>
           </label>
-          <label>
-            Место проживания
-            <input type="text"
+          <label className='createUser__label'>
+            <div className='createUser__property'>Город:</div>
+            <Input type="text"
                    placeholder='Россия, г.Орел'
                    name='place'
                    value={form.place}
                    onChange={onChangeHandler}
             />
           </label>
-          <button type='submit'>Создать пользователя</button>
-          <button type='button' onClick={() => setForm({
-            fullName: '',
-            aboutMe: '',
-            phone: '',
-            place: ''
-          })}>Очистить поля
-          </button>
+          <div className='createUser__buttons'>
+            <Button type='submit'
+                    className='createUser__btnSubmit'
+                    value='Создать пользователя'/>
+            <Button type='button'
+                    value='Очистить поля'
+                    onClick={() =>
+                      setForm({
+                        fullName: '',
+                        aboutMe: '',
+                        phone: '',
+                        place: ''
+                      })}/></div>
+
         </div>
       </form>
     </div>

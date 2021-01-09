@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import './Login.scss'
 import {NavLink} from "react-router-dom";
 import {signIn} from "../../redux/authReducer";
 import {connect} from 'react-redux'
+import Input from "../common/Input/Input";
+import Button from "../common/Button/Button";
 
 const Login = (props) => {
   const {signIn} = props
@@ -28,20 +30,23 @@ const Login = (props) => {
     <div className='login'>
       <form onSubmit={submitHandler}>
         <div className='login__body'>
-          <h1>Вход</h1>
-          <input type="text"
+          <h1 className='login__title title'>Вход</h1>
+          <Input type="text"
+                 className='login__input'
                  placeholder='Email'
                  name='email'
                  value={form.email}
                  onChange={inputChangeHandler}/>
-          <input type="password"
+          <Input type="password"
+                 className='login__input'
                  placeholder='Password'
                  name='password'
                  value={form.password}
                  onChange={inputChangeHandler}/>
-          <button type='submit'>Войти</button>
-          <div>Еще нет аккаунта на Dashboard?</div>
-          <NavLink to='/registration'>Зарегестрироваться</NavLink>
+          <Button type='submit' value='Войти' className='login__btnSubmit'/>
+          <div className='login__ask'>Еще нет аккаунта на Dashboard?</div>
+          <NavLink to='/registration' className='login__redirect'>Зарегестрироваться</NavLink>
+
         </div>
       </form>
     </div>

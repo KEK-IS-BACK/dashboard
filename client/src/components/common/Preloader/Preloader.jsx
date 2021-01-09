@@ -1,7 +1,11 @@
-import React from 'react'
+import './Prelodaer.scss'
+
 
 const Preloader = () => {
-  return <div>Loading ...</div>
+  return (
+    <div className='preloader'>
+      Loading ...
+    </div>)
 }
 
 export default Preloader

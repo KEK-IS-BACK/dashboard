@@ -1,5 +1,6 @@
 import {usersApi} from "../api/mainApi";
 import defaultAvatar from '../assets/img/jpg/default_avatar.jpg'
+import {selectRandomApiCards} from "./apiCardsRedecer";
 
 const SET_USERS = 'dashboard/settingsPage/SET_USERS'
 const SET_ACTIVE_USER = 'dashboard/settingsPage/SET_ACTIVE_USER'
@@ -7,11 +8,11 @@ const DELETE_ACTIVE_USER = 'dashboard/settingsPage/DELETE_ACTIVE_USER'
 
 const initialState = {
   users: [],
-  activeUser: {},
+  activeUser: null,
   defaultAvatar: defaultAvatar
 }
 
-const settingsPageReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USERS:
       return {
@@ -26,7 +27,7 @@ const settingsPageReducer = (state = initialState, action) => {
     case DELETE_ACTIVE_USER:
       return {
         ...state,
-        activeUser: {}
+        activeUser: null
       }
     default:
       return state
@@ -75,6 +76,20 @@ export const selectActiveUser = id => dispatch => {
   localStorage.setItem('activeUserId', id)
 
   dispatch(setActiveUser(id))
+  dispatch(selectRandomApiCards())
 }
 
-export default settingsPageReducer
+export const updateUserInfo = (id, info) => async dispatch => {
+  try {
+    const response = await usersApi.updateUser(id, info)
+
+    if(response.status === 200){
+      await dispatch(getUsers())
+      dispatch(setActiveUser(id))
+    }
+
+  } catch (e) {}
+
+}
+
+export default usersReducer

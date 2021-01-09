@@ -1,0 +1,11 @@
+.quote{
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  column-gap: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  &:hover{
+    background-color: #ccc;
+  }
+}

@@ -44,11 +44,31 @@ router.get('/', auth,
 router.delete('/:id',
   auth,
   async (request, response) => {
-    console.log(request.params.id)
+
     try {
       await innerUser.findByIdAndDelete(request.params.id)
 
       response.json({message: 'Пользователь удален'})
+    } catch (e) {
+      console.log('Зашел в catch')
+      response.status(500).json({message: 'Внутренняя ошибка сервера'})
+    }
+  })
+
+// api/users/update/:id (Put запрос)
+router.put('/update/:id',
+  auth,
+  async (request, response) => {
+    console.log("Получен запрос:", request)
+    try {
+      const userId = request.params.id
+      console.log(request.body)
+      const {fullName, aboutMe, phone, place} = request.body
+
+
+      const user = await innerUser.findOneAndUpdate({_id: userId}, {fullName, aboutMe, phone, place})
+      console.log(user)
+      response.json({message: 'Пользователь обновлен'})
     } catch (e) {
       console.log('Зашел в catch')
       response.status(500).json({message: 'Внутренняя ошибка сервера'})

@@ -1,7 +1,7 @@
 import './SettingsPage.scss'
 import {connect} from 'react-redux'
 import {getActiveUser, getSettingsPageUsers} from "../../redux/selectors";
-import {createUser, deleteUser, selectActiveUser} from "../../redux/settingsPageReducer";
+import {createUser, deleteUser, selectActiveUser} from "../../redux/usersReducer";
 import User from "../../components/User/User";
 import CreateUser from "../../components/CreateUser/CreateUser";
 import ActiveUser from "./ActiveUser/ActiveUser";
@@ -12,7 +12,7 @@ const SettingsPage = props => {
   const usersElements = users.map((user, index) => <User key={index} {...user}
                                                          deleteUser={deleteUser}
                                                          selectActiveUser={selectActiveUser}
-                                                         activeUser={activeUser}/>)
+                                                         activeUserId={activeUser && activeUser._id}/>)
 
   return (
     <div className='settingsPage'>

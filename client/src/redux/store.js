@@ -1,14 +1,14 @@
 import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import authReducer from "./authReducer";
-import settingsPageReducer from "./settingsPageReducer";
+import usersReducer from "./usersReducer";
 import initialReducer from "./initialReducer";
 import apiCardsRedecer from "./apiCardsRedecer";
 
 const reducers = combineReducers({
   initial: initialReducer,
   auth: authReducer,
-  settingsPage: settingsPageReducer,
+  users: usersReducer,
   apiCards: apiCardsRedecer
 })
 

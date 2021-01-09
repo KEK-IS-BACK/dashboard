@@ -1,21 +1,29 @@
 @import "../../assets/scss/vars";
 
-.header{
+.header {
   width: 100%;
   background-color: #2B3245;
-  &__body{
+
+  &__body {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     align-items: center;
     height: 80px;
   }
-  &__buttons{
+
+  &__buttons {
     justify-self: right;
   }
-  &__link{
-    color: white;
-    &:visited{
+
+  &__link {
+    color: $whiteColor;
+
+    &:visited {
       color: $whiteColor;
+    }
+
+    &_registration{
+      margin: 0 15px 0 0;
     }
   }
 }

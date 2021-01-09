@@ -3,6 +3,8 @@ import './Registration.scss'
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import {signUp} from "../../redux/authReducer";
+import Input from "../common/Input/Input";
+import Button from "../common/Button/Button";
 
 const Registration = (props) => {
 
@@ -30,25 +32,28 @@ const Registration = (props) => {
     <div className='registration'>
       <form onSubmit={submitHandler}>
         <div className='registration__body'>
-          <h1>Регистрация</h1>
-          <input type="text"
+          <h1 className='registration__title title'>Регистрация</h1>
+          <Input type="text"
+                 className='registration__input'
                  placeholder='Email'
                  name='email'
                  onChange={inputChangeHandler}
                  value={form.email}/>
-          <input type="password"
+          <Input type="password"
+                 className='registration__input'
                  placeholder='Пароль'
                  name='password'
                  onChange={inputChangeHandler}
                  value={form.password}/>
-          <input type="text"
+          <Input type="text"
+                 className='registration__input'
                  placeholder='ФИО'
                  name='fullName'
                  onChange={inputChangeHandler}
                  value={form.fullName}/>
-          <button type='submit'>Зарегестрироваться</button>
-          <div>Уже есть аккаунт на Dashboard?</div>
-          <NavLink to='/login'>Войти</NavLink>
+          <Button type='submit' value='Зарегестрироваться' className='registration__btnSubmit'/>
+          <div className='registration__ask'>Уже есть аккаунт на Dashboard?</div>
+          <NavLink to='/login' className='registration__redirect'>Войти</NavLink>
         </div>
       </form>
     </div>

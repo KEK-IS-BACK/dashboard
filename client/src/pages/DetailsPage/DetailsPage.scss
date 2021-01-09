@@ -2,4 +2,15 @@
   &__title{
     padding: 15px 0;
   }
+  &__apiInfo{
+    margin: 0 0 25px 0;
+  }
+  &__apiImg{
+    width: 32px;
+    height: 32px;
+  }
+  &__apiHeader{
+    display: flex;
+    align-items: center;
+  }
 }

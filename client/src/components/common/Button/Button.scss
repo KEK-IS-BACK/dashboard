@@ -1,0 +1,16 @@
+@import "../../../assets/scss/vars";
+
+.button {
+  border: none;
+  width: min-content;
+  border-radius: 5px;
+  padding: 10px 15px;
+  background-color: $lightColor;
+  transition: all ease .4s;
+
+  &:hover {
+    background-color: $primaryColor;
+    color: white;
+    transition: all ease .4s;
+  }
+}

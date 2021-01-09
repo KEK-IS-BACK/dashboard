@@ -1,5 +1,6 @@
 import {getOwnerData} from "./authReducer";
-import {getUsers, setActiveUser} from "./settingsPageReducer";
+import {getUsers, setActiveUser} from "./usersReducer";
+import {selectRandomApiCards, setCurrentApi} from "./apiCardsRedecer";
 
 const SET_INITIALIZE_APP = 'dashboard/initialReducer/SET_INITIALIZE_APP'
 
@@ -32,6 +33,13 @@ export const initializeMyApp = () => async (dispatch, getState) => {
   const activeUserId = localStorage.getItem('activeUserId')
   if(activeUserId) {
     await dispatch(setActiveUser(activeUserId))
+  }
+
+  dispatch(selectRandomApiCards())
+
+  const lastApiId = localStorage.getItem('lastApiId')
+  if(lastApiId) {
+    await dispatch(setCurrentApi(lastApiId)) //
   }
 
   dispatch(setInitializeApp())

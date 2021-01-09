@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import Header from "./components/Header/Header";
-import useRoutes from "./hooks/routes";
+import useRoutes from "./routes";
 import {getIsAppInitialized, getIsAuth} from "./redux/selectors";
 import {connect} from 'react-redux'
 import {getOwnerData} from "./redux/authReducer";

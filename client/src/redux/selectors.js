@@ -7,17 +7,17 @@ export const getOwnerFullName = state => {
   return state.auth.owner.fullName
 }
 
-//settingsPage
+//usersReducer
 export const getSettingsPageUsers = state => {
-  return state.settingsPage.users
+  return state.users.users
 }
 
 export const getActiveUser = state => {
-  return state.settingsPage.activeUser
+  return state.users.activeUser
 }
 
 export const getDefaultAvatar = state => {
-  return state.settingsPage.defaultAvatar
+  return state.users.defaultAvatar
 }
 
 //initialReducer
@@ -26,10 +26,14 @@ export const getIsAppInitialized = state => {
 }
 
 //apiCardsReducer
-export const getApiCards = state => {
-  return state.apiCards.apiCards
+export const getCurrentApiCards = state => { // Получение трех рандомных карточек
+  return state.apiCards.currentApiCards
 }
 
 export const getApiResult = state => {
   return state.apiCards.apiResult
+}
+
+export const getCurrentApi = state => {
+  return state.apiCards.currentApi
 }

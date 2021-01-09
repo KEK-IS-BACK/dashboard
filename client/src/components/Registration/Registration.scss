@@ -1,12 +1,39 @@
-.registration{
+@import "../../assets/scss/vars";
+
+.registration {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
-  &__body{
-    display: grid;
+  flex-grow: 1;
+
+  &__title {
+    margin: 0 0 15px 0;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 300px;
-    gap: 15px;
+    height: 300px;
+    border-radius: 5px;
+    background: $whiteColor;
+    padding: 15px;
+  }
+
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 15px 0;
+  }
+
+  &__btnSubmit{
+    min-width: 100%;
+    margin: 0 0 15px 0;
+  }
+
+  &__ask{
+    margin: 0 0 15px 0;
   }
 }

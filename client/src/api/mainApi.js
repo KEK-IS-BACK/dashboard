@@ -7,7 +7,7 @@ function setInstanceWithToken(token = null) {
   const userToken = token || localStorage.getItem('userToken')
 
   return axios.create({
-    baseURL: 'api/',
+    baseURL: '/api/',
     headers: {
       'Authorization': 'Bearer ' + userToken
     }
@@ -75,11 +75,19 @@ export const usersApi = {
 
   async deleteUser(userId) {
     try {
-      const response = await instanceWithToken.delete(`/users/${userId}`)
+      const response = await instanceWithToken.delete(`users/${userId}`)
 
       return response.data
     } catch (e) {
       return e.response.data
     }
+  },
+
+  async updateUser(userId, info) {
+    try{
+      const response = await instanceWithToken.put(`users/update/${userId}`, info)
+
+      return response
+    } catch (e) {}
   }
 }

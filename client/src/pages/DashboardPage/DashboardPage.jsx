@@ -1,13 +1,31 @@
 import './DashboardPage.scss'
 import ApiCard from "../../components/ApiCard/ApiCard";
-import {getApiCards} from "../../redux/selectors";
+import {getActiveUser, getCurrentApiCards} from "../../redux/selectors";
 import {connect} from 'react-redux'
-import {setApiResult} from "../../redux/apiCardsRedecer";
+import {setCurrentApi} from "../../redux/apiCardsRedecer";
+import Preloader from "../../components/common/Preloader/Preloader";
 
 const DashboardPage = props => {
-  let {cards, setApiResult} = props
+  let {cards, setCurrentApi, activeUser} = props
 
-  const cardsElements = cards.map((card, index) => <ApiCard key={index} {...card} setApiResult={setApiResult}/>)
+
+  const cardsElements = cards.map((card, index) => <ApiCard key={index}
+                                                            {...card}
+                                                            setCurrentApi={setCurrentApi}
+                                                            index={index}/>)
+
+  if (!activeUser) {
+    return (
+      <div className='dashboardPage'>
+        <div className="container">
+          Выберите пользователя
+        </div>
+      </div>)
+
+  } else if (!cards) {
+    return <Preloader/>
+  }
+
 
   return (
     <div className='dashboardPage'>
@@ -22,7 +40,8 @@ const DashboardPage = props => {
 }
 
 const mapStateToProps = state => ({
-  cards: getApiCards(state)
+  cards: getCurrentApiCards(state),
+  activeUser: getActiveUser(state)
 })
 
-export default connect(mapStateToProps, {setApiResult})(DashboardPage)
+export default connect(mapStateToProps, {setCurrentApi})(DashboardPage)
