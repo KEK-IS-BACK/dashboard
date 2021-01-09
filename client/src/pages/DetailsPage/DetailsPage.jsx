@@ -23,7 +23,7 @@ const DetailsPage = props => {
     }
 
     return () => {setApiResult(null)} // Чистит стейт после закрытия компоненты
-  }, [currentApi])
+  }, [currentApi, makeApiRequest, setApiResult])
 
   if (!apiResult) return <Preloader/>
 

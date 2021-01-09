@@ -11,7 +11,6 @@ const Holidays = props => {
                     type={item.type}/>
   })
 
-  console.log(holidays)
   return (
     <div className='holidays'>
       {holidaysElements}

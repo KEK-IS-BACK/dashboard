@@ -33,7 +33,7 @@ router.get('/', auth,
       {owner: user.userId},
       ['fullName', 'aboutMe', 'phone', 'place']
     )
-    console.log(innerUsers)
+
     response.json([...innerUsers])
   } catch (e) {
     response.status(500).json({message: 'Внутренняя ошибка сервера'})
@@ -50,7 +50,7 @@ router.delete('/:id',
 
       response.json({message: 'Пользователь удален'})
     } catch (e) {
-      console.log('Зашел в catch')
+
       response.status(500).json({message: 'Внутренняя ошибка сервера'})
     }
   })
@@ -59,18 +59,16 @@ router.delete('/:id',
 router.put('/update/:id',
   auth,
   async (request, response) => {
-    console.log("Получен запрос:", request)
+
     try {
       const userId = request.params.id
-      console.log(request.body)
       const {fullName, aboutMe, phone, place} = request.body
 
 
-      const user = await innerUser.findOneAndUpdate({_id: userId}, {fullName, aboutMe, phone, place})
-      console.log(user)
+      await innerUser.findOneAndUpdate({_id: userId}, {fullName, aboutMe, phone, place})
+
       response.json({message: 'Пользователь обновлен'})
     } catch (e) {
-      console.log('Зашел в catch')
       response.status(500).json({message: 'Внутренняя ошибка сервера'})
     }
   })
