@@ -37,7 +37,7 @@ export const initializeMyApp = () => async (dispatch, getState) => {
 
   dispatch(selectRandomApiCards())
 
-  const lastApiId = localStorage.getItem('lastApiId')
+  const lastApiId = +localStorage.getItem('lastApiId')
   if(lastApiId) {
     await dispatch(setCurrentApi(lastApiId)) //
   }

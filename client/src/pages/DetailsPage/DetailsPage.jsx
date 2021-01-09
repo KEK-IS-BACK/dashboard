@@ -17,17 +17,13 @@ import Currency from "../../components/Currency/Currency";
 const DetailsPage = props => {
   const {apiResult, currentApi, makeApiRequest, setApiResult} = props
 
-
   useEffect(() => {
-
-
     if (currentApi && currentApi.httpRequest) {
       makeApiRequest(currentApi.httpRequest)
     }
 
     return () => {setApiResult(null)} // Чистит стейт после закрытия компоненты
   }, [currentApi])
-
 
   if (!apiResult) return <Preloader/>
 
