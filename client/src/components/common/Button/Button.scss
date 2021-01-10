@@ -6,11 +6,16 @@
   border-radius: 5px;
   padding: 10px 15px;
   background-color: $lightColor;
-  transition: all ease .4s;
+  transition: color,background-color ease .3s;
 
   &:hover {
     background-color: $primaryColor;
     color: white;
-    transition: all ease .4s;
+    transition: color,background-color ease .3s;
+  }
+
+  &:disabled{
+    background-color: $lightColor;
+    opacity: 0.4;
   }
 }

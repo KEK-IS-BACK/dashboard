@@ -44,37 +44,36 @@ const setOwnerData = (id, fullName) => ({type: SET_OWNER_DATA, data: {id, fullNa
 
 export const signUp = (email, password, fullName) => async dispatch => {
   try {
-    const data = await authApi.registration(email, password, fullName)
+    const response = await authApi.registration(email, password, fullName)
 
-    if(data.errors){
-      console.log(data.errors)
-      return
-    }
+    if (response.status === 201) dispatch(signIn(email, password))
 
-    dispatch(signIn(email, password))
-  } catch (e) {}
+    return response.data
+  } catch (e) {
+    return e.response.data
+  }
 
 }
 export const signIn = (email, password) => async dispatch => {
   try {
-    const data = await authApi.login(email, password)
+    const response = await authApi.login(email, password)
 
-    if(data.errors) {
-      console.log(data.errors)
-      return
+    if (response.status === 200) {
+      await dispatch(setOwnerData(response.data.userId, response.data.fullName))
+      await dispatch(getUsers())
     }
 
-    await dispatch(setOwnerData(data.userId, data.fullName))
-    await dispatch(getUsers())
-
-  } catch (e) {}
+  } catch (e) {
+    return e.response.data
+  }
 }
 export const getOwnerData = () => async dispatch => {
   try {
     const data = await profileApi.getOwnerProfile()
 
     dispatch(setOwnerData(data.id, data.fullName))
-  } catch (e) {}
+  } catch (e) {
+  }
 }
 export const logout = () => dispatch => {
   localStorage.clear()

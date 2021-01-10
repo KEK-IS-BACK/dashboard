@@ -16,10 +16,10 @@
     flex-direction: column;
     align-items: center;
     width: 300px;
-    height: 300px;
+    box-sizing: border-box;
     border-radius: 5px;
     background: $whiteColor;
-    padding: 15px;
+    padding: 25px 15px;
   }
 
   &__input {
@@ -28,12 +28,29 @@
     margin: 0 0 15px 0;
   }
 
-  &__btnSubmit{
+  &__errors {
+    margin: 5px 0 20px;
+  }
+
+  &__error {
+    margin: 0 0 10px;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  &__message {
+    text-align: center;
+    margin: 0 0 20px;
+  }
+
+  &__btnSubmit {
     min-width: 100%;
     margin: 0 0 15px 0;
   }
 
-  &__ask{
+  &__ask {
     margin: 0 0 15px 0;
   }
 }

@@ -5,11 +5,14 @@ import {connect} from "react-redux";
 import {signUp} from "../../redux/authReducer";
 import Input from "../common/Input/Input";
 import Button from "../common/Button/Button";
+import FormError from "../common/FormError/FormError";
 
 const Registration = (props) => {
-
   const {signUp} = props
 
+  const [errors, setErrors] = useState()
+  const [message, setMessage] = useState()
+  const [isLoading, setIsLoading] = useState(false)
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -25,7 +28,16 @@ const Registration = (props) => {
 
   const submitHandler = async (e) => {
     e.preventDefault()
-    signUp(form.email, form.password, form.fullName)
+    setErrors(null)
+    setMessage(null)
+    setIsLoading(true)
+
+    const data = await signUp(form.email, form.password, form.fullName)
+
+    if (data && data.errors) setErrors(data.errors)
+    if (data && data.message) setMessage(data.message)
+
+    setIsLoading(false)
   }
 
   return (
@@ -51,7 +63,22 @@ const Registration = (props) => {
                  name='fullName'
                  onChange={inputChangeHandler}
                  value={form.fullName}/>
-          <Button type='submit' value='Зарегестрироваться' className='registration__btnSubmit'/>
+          {
+            errors &&
+            <div className='registration__errors'>
+              {errors.map((error, i) => <FormError key={i}
+                                                   text={error.msg}
+                                                   className='registration__error'/>)}
+            </div>
+
+          }
+          {
+            message && <div className='registration__message'>{message}</div>
+          }
+          <Button type='submit'
+                  value='Зарегестрироваться'
+                  className='registration__btnSubmit'
+                  disabled={isLoading}/>
           <div className='registration__ask'>Уже есть аккаунт на Dashboard?</div>
           <NavLink to='/login' className='registration__redirect'>Войти</NavLink>
         </div>
@@ -60,6 +87,5 @@ const Registration = (props) => {
   )
 }
 
-const mapStateToProps = state => ({})
 
-export default connect(mapStateToProps, {signUp})(Registration)
+export default connect(null, {signUp})(Registration)

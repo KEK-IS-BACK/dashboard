@@ -17,11 +17,9 @@ function setInstanceWithToken(token = null) {
 export const authApi = {
   async registration(email, password, fullName) {
     try {
-      const response = await axios.post('api/auth/registration', {email, password, fullName})
-
-      return response.data
+      return await axios.post('api/auth/registration', {email, password, fullName})
     } catch (e) {
-      return e.response.data
+      throw e
     }
   },
 
@@ -34,9 +32,9 @@ export const authApi = {
         instanceWithToken = setInstanceWithToken(response.data.token)
       }
 
-      return response.data
+      return response
     } catch (e) {
-      return e.response.data
+      throw e
     }
   }
 }
@@ -84,10 +82,9 @@ export const usersApi = {
   },
 
   async updateUser(userId, info) {
-    try{
-      const response = await instanceWithToken.put(`users/update/${userId}`, info)
-
-      return response
-    } catch (e) {}
+    try {
+      return await instanceWithToken.put(`users/update/${userId}`, info)
+    } catch (e) {
+    }
   }
 }
