@@ -1,6 +1,7 @@
 const {Router} = require('express')
 const auth = require('../middleware/auth.middleware')
 const innerUser = require('../models/innerUser')
+const {body, validationResult} = require("express-validator");
 
 const router = Router()
 
@@ -26,19 +27,19 @@ router.post(
 // api/users/ (get запрос)
 router.get('/', auth,
   async (require, response) => {
-  try {
-    const {user} = require
+    try {
+      const {user} = require
 
-    const innerUsers = await innerUser.find(
-      {owner: user.userId},
-      ['fullName', 'aboutMe', 'phone', 'place']
-    )
+      const innerUsers = await innerUser.find(
+        {owner: user.userId},
+        ['fullName', 'aboutMe', 'phone', 'place']
+      )
 
-    response.json([...innerUsers])
-  } catch (e) {
-    response.status(500).json({message: 'Внутренняя ошибка сервера'})
-  }
-})
+      response.json([...innerUsers])
+    } catch (e) {
+      response.status(500).json({message: 'Внутренняя ошибка сервера'})
+    }
+  })
 
 // api/users/:id (delete запрос)
 router.delete('/:id',
@@ -57,10 +58,23 @@ router.delete('/:id',
 
 // api/users/update/:id (Put запрос)
 router.put('/update/:id',
+  [
+    body('fullName', 'Введите ФИО').not().isEmpty().trim().escape(),
+    body('phone', 'Введите ФИО').not().isEmpty().trim().escape(),
+    body('place', 'Введите ФИО').not().isEmpty().trim().escape()
+  ],
   auth,
   async (request, response) => {
-
     try {
+      const errors = validationResult(request)
+
+      if (!errors.isEmpty()) {
+        return response.status(400).json({
+          errors: errors.array(),
+          message: 'Некоректные данные'
+        })
+      }
+
       const userId = request.params.id
       const {fullName, aboutMe, phone, place} = request.body
 
