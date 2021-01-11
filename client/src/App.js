@@ -1,12 +1,11 @@
 import React, {useEffect} from "react";
-import Header from "./components/Header/Header";
 import useRoutes from "./routes";
-import {getIsAppInitialized, getIsAuth} from "./redux/selectors";
-import {connect} from 'react-redux'
-import {getOwnerData} from "./redux/authReducer";
-import './App.scss';
+import Header from "./components/Header/Header";
 import Preloader from "./components/common/Preloader/Preloader";
 import {initializeMyApp} from "./redux/initialReducer";
+import {getIsAppInitialized, getIsAuth} from "./redux/selectors";
+import {connect} from 'react-redux'
+import './App.scss';
 
 
 const App = props => {
@@ -18,11 +17,11 @@ const App = props => {
     initializeMyApp()
   }, [initializeMyApp])
 
-  if(!isAppInitialized) return <Preloader/>
+  if (!isAppInitialized) return <Preloader/>
 
   return (
     <div className="app">
-      <Header/>
+      <Header isAuth={isAuth}/>
       {routes}
     </div>
   );
@@ -33,4 +32,4 @@ const mapStateToProps = state => ({
   isAppInitialized: getIsAppInitialized(state)
 })
 
-export default connect(mapStateToProps, {getOwnerData, initializeMyApp})(App);
+export default connect(mapStateToProps, {initializeMyApp})(App);

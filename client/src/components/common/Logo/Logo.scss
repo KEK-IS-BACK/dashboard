@@ -1,21 +1,25 @@
 @import "../../../assets/scss/vars";
-.logo{
+
+.logo {
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: min-content;
   height: min-content;
-  &__link{
+
+  &__link {
     width: 100%;
     height: 100%;
     text-transform: uppercase;
     text-decoration: none;
     font-weight: bold;
-    &:visited{
+
+    &:visited {
       color: $whiteColor;
     }
-    &:focus{
+
+    &:focus {
       outline: none;
     }
   }

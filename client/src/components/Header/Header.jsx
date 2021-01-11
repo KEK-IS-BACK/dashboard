@@ -2,14 +2,12 @@ import React from "react";
 import Logo from "../common/Logo/Logo";
 import {NavLink} from "react-router-dom";
 import Account from "./Account/Account";
-import {connect} from "react-redux";
-import './Header.scss'
-import {getActiveUser, getIsAuth, getSettingsPageUsers} from "../../redux/selectors";
 import WidgetUsers from "./WidgetUsers/WidgetUsers";
+import './Header.scss'
 
 
 const Header = (props) => {
-  const {isAuth, users, activeUser} = props
+  const {isAuth} = props
 
   return (
     <header className='header'>
@@ -18,7 +16,7 @@ const Header = (props) => {
           <Logo className='header__logo'/>
           {isAuth
             ? <>
-              <WidgetUsers users={users} activeUser={activeUser} className='header__users'/>
+              <WidgetUsers className='header__users'/>
               <Account className='header__account'/>
             </>
             : <div className='header__buttons'>
@@ -32,10 +30,5 @@ const Header = (props) => {
   )
 }
 
-const mapStateToProps = state => ({
-  isAuth: getIsAuth(state),
-  users: getSettingsPageUsers(state),
-  activeUser: getActiveUser(state)
-})
 
-export default connect(mapStateToProps)(Header)
+export default Header

@@ -50,7 +50,7 @@
       grid-template-columns: 1fr;
     }
 
-    &__createUser{
+    &__createUser {
       grid-column: unset;
     }
   }
@@ -58,7 +58,7 @@
 
 @media screen and (max-width: 479px) {
   .settingsPage {
-    &__createUser{
+    &__createUser {
       grid-column: unset;
     }
   }

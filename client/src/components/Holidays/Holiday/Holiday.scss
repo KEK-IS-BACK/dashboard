@@ -1,15 +1,17 @@
-.holiday{
+.holiday {
   border: 1px solid black;
   padding: 15px;
   border-radius: 5px;
   display: grid;
   gap: 5px;
-  &__field{
+
+  &__field {
     display: grid;
     grid-template-columns: 200px 1fr;
     column-gap: 15px;
   }
-  &__name{
+
+  &__name {
     font-weight: 600;
   }
 }

@@ -37,25 +37,25 @@
     margin: 0 15px 0 0;
   }
 
-  &__btnClear{
+  &__btnClear {
     height: min-content;
   }
 }
 
 @media screen and (max-width: 479px) {
   .createUser {
-    &__label{
+    &__label {
       grid-template-columns: 1fr;
       gap: 15px;
     }
 
-    &__buttons{
+    &__buttons {
       justify-content: center;
       flex-wrap: wrap;
       box-sizing: border-box;
     }
 
-    &__btnSubmit{
+    &__btnSubmit {
       margin: 0 15px 15px 0;
     }
   }

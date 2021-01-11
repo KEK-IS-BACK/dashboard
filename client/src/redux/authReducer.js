@@ -4,7 +4,6 @@ import {deleteActiveUser, getUsers, setUsers} from "./usersReducer";
 const SET_OWNER_DATA = 'dashboard/auth/SET_OWNER_DATA'
 const LOGOUT = 'dashboard/auth/LOGOUT'
 
-
 const initialState = {
   owner: {
     id: null,
@@ -54,6 +53,7 @@ export const signUp = (email, password, fullName) => async dispatch => {
   }
 
 }
+
 export const signIn = (email, password) => async dispatch => {
   try {
     const response = await authApi.login(email, password)
@@ -67,6 +67,7 @@ export const signIn = (email, password) => async dispatch => {
     return e.response.data
   }
 }
+
 export const getOwnerData = () => async dispatch => {
   try {
     const data = await profileApi.getOwnerProfile()
@@ -75,6 +76,7 @@ export const getOwnerData = () => async dispatch => {
   } catch (e) {
   }
 }
+
 export const logout = () => dispatch => {
   localStorage.clear()
 

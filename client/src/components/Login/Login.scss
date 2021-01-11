@@ -20,33 +20,35 @@
     padding: 25px 15px;
   }
 
-  &__input{
+  &__input {
     box-sizing: border-box;
     margin: 0 0 15px 0;
     min-width: 100%;
   }
 
-  &__errors{
+  &__errors {
     margin: 5px 0 20px;
   }
 
-  &__error{
+  &__error {
     margin: 0 0 10px;
-    &:last-child{
+
+    &:last-child {
       margin: 0;
     }
   }
 
-  &__message{
+  &__message {
     text-align: center;
     margin: 0 0 20px;
   }
 
-  &__btnSubmit{
+  &__btnSubmit {
     margin: 0 0 15px 0;
     min-width: 100%;
   }
-  &__ask{
+
+  &__ask {
     margin: 0 0 15px 0;
   }
 }

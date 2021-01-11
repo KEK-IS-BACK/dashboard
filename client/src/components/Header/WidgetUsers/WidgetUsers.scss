@@ -20,10 +20,12 @@
     align-items: center;
     text-align: center;
     cursor: pointer;
-    &Img{
+
+    &Img {
       width: 50px;
       margin: 0 15px 0 0;
-      &>img{
+
+      & > img {
         width: 100%;
       }
     }

@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import './Registration.scss'
-import {NavLink} from "react-router-dom";
-import {connect} from "react-redux";
-import {signUp} from "../../redux/authReducer";
 import Input from "../common/Input/Input";
 import Button from "../common/Button/Button";
 import FormError from "../common/FormError/FormError";
+import {NavLink} from "react-router-dom";
+import {connect} from "react-redux";
+import {signUp} from "../../redux/authReducer";
+import './Registration.scss'
 
 const Registration = (props) => {
   const {signUp} = props

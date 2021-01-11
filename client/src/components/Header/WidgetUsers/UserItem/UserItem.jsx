@@ -4,7 +4,7 @@ const UserItem = props => {
   const {fullName, id, selectActiveUser, img, history, activeUserId} = props
 
   const onClickHandler = () => {
-    if(id !== activeUserId){
+    if (id !== activeUserId) {
       selectActiveUser(id)
     }
 

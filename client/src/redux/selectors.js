@@ -16,6 +16,10 @@ export const getActiveUser = state => {
   return state.users.activeUser
 }
 
+export const getActiveUserId = state => {
+  return state.users.activeUser ? state.users.activeUser._id : null
+}
+
 export const getDefaultAvatar = state => {
   return state.users.defaultAvatar
 }
@@ -34,6 +38,6 @@ export const getApiResult = state => {
   return state.apiCards.apiResult
 }
 
-export const getCurrentApi = state => {
-  return state.apiCards.currentApi
+export const getActiveApiCard = state => {
+  return state.apiCards.activeApiCard
 }

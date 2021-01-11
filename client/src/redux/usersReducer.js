@@ -83,12 +83,13 @@ export const updateUserInfo = (id, info) => async dispatch => {
   try {
     const response = await usersApi.updateUser(id, info)
 
-    if(response.status === 200){
+    if (response.status === 200) {
       await dispatch(getUsers())
       dispatch(setActiveUser(id))
     }
 
-  } catch (e) {}
+  } catch (e) {
+  }
 
 }
 

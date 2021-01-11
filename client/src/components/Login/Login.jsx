@@ -1,11 +1,11 @@
-import {useState} from "react";
-import './Login.scss'
-import {NavLink} from "react-router-dom";
-import {signIn} from "../../redux/authReducer";
-import {connect} from 'react-redux'
+import React, {useState} from "react";
 import Input from "../common/Input/Input";
 import Button from "../common/Button/Button";
 import FormError from "../common/FormError/FormError";
+import {NavLink} from "react-router-dom";
+import {signIn} from "../../redux/authReducer";
+import {connect} from 'react-redux'
+import './Login.scss'
 
 const Login = (props) => {
   const {signIn} = props
@@ -32,8 +32,8 @@ const Login = (props) => {
     setIsLoading(true)
 
     const data = await signIn(form.email, form.password)
-    if(data && data.errors) setErrors(data.errors)
-    if(data && data.message) setMessage(data.message)
+    if (data && data.errors) setErrors(data.errors)
+    if (data && data.message) setMessage(data.message)
 
     setIsLoading(false)
   }

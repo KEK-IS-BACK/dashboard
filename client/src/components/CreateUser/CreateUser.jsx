@@ -1,7 +1,9 @@
-import './CreateUser.scss'
-import {useState} from "react";
+import React, {useState} from "react";
 import Input from "../common/Input/Input";
 import Button from "../common/Button/Button";
+import {createUser} from "../../redux/usersReducer";
+import {connect} from 'react-redux'
+import './CreateUser.scss'
 
 const CreateUser = props => {
   const {createUser, className} = props
@@ -36,16 +38,16 @@ const CreateUser = props => {
       <h1 className='subtitle createUser__title'>Добавить пользователя</h1>
       <form onSubmit={submitHandler}>
         <div className='createUser__body'>
+
           <label className='createUser__label'>
             <div className='createUser__property'>ФИО:</div>
-
             <Input type="text"
                    placeholder='Иванов Иван Иванович'
                    name='fullName'
                    value={form.fullName}
-                   onChange={onChangeHandler}
-            />
+                   onChange={onChangeHandler}/>
           </label>
+
           <label className='createUser__label'>
             <div className='createUser__property'>О себе:</div>
             <textarea placeholder='Например, "Ответственный и жизнерадостный :)"'
@@ -54,6 +56,7 @@ const CreateUser = props => {
                       value={form.aboutMe}
                       onChange={onChangeHandler}/>
           </label>
+
           <label className='createUser__label'>
             <div className='createUser__property'>Номер телефона:</div>
             <Input type="text"
@@ -62,6 +65,7 @@ const CreateUser = props => {
                    value={form.phone}
                    onChange={onChangeHandler}/>
           </label>
+
           <label className='createUser__label'>
             <div className='createUser__property'>Город:</div>
             <Input type="text"
@@ -71,6 +75,7 @@ const CreateUser = props => {
                    onChange={onChangeHandler}
             />
           </label>
+
           <div className='createUser__buttons'>
             <Button type='submit'
                     className='createUser__btnSubmit'
@@ -78,13 +83,13 @@ const CreateUser = props => {
             <Button type='button'
                     className='createUser__btnClear'
                     value='Очистить поля'
-                    onClick={() =>
-                      setForm({
-                        fullName: '',
-                        aboutMe: '',
-                        phone: '',
-                        place: ''
-                      })}/></div>
+                    onClick={() => setForm({
+                      fullName: '',
+                      aboutMe: '',
+                      phone: '',
+                      place: ''
+                    })}/>
+          </div>
 
         </div>
       </form>
@@ -92,4 +97,5 @@ const CreateUser = props => {
   )
 }
 
-export default CreateUser
+
+export default connect(null, {createUser})(CreateUser)

@@ -1,19 +1,20 @@
-import './ActiveUser.scss'
-import defaultAvatar from '../../../assets/img/jpg/default_avatar.jpg'
+import React, {useState} from 'react'
 import Button from "../../../components/common/Button/Button";
-import {useState} from "react";
 import UserInfoForm from "./UserInfoForm/UserInfoForm";
+import {getActiveUser, getDefaultAvatar} from "../../../redux/selectors";
+import {connect} from 'react-redux'
+import './ActiveUser.scss'
 
 const ActiveUser = props => {
-  const {activeUser} = props
+  const {activeUser, defaultAvatar} = props
   const [isEditMod, setIsEditMod] = useState(false)
 
-
-  if(!activeUser) return <div className='activeUser'>Активный пользователь не выбран</div>
+  if (!activeUser) return <div className='activeUser'>Активный пользователь не выбран</div>
 
   return (
     <div className='activeUser'>
       <h1 className='activeUser__title subtitle'>Текущий пользователь</h1>
+
       <div className='activeUser__img'>
         <img src={defaultAvatar} alt="фотография пользователя"/>
       </div>
@@ -29,9 +30,13 @@ const ActiveUser = props => {
         </div>
       }
 
-
     </div>
   )
 }
 
-export default ActiveUser
+const mapStateToProps = state => ({
+  activeUser: getActiveUser(state),
+  defaultAvatar: getDefaultAvatar(state)
+})
+
+export default connect(mapStateToProps)(ActiveUser)

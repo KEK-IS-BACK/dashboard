@@ -29,17 +29,17 @@
     border: 2px solid $primaryColor;
   }
 
-  &__info{
+  &__info {
     min-height: 90px;
     overflow-y: auto;
   }
 
-  &__fullName{
+  &__fullName {
     padding: 0 0 10px 0;
     cursor: pointer;
   }
 
-  &__btnDelete{
+  &__btnDelete {
     position: absolute;
     top: -1px;
     right: -1px;
@@ -53,9 +53,10 @@
 }
 
 @media screen and (max-width: 479px) {
-  .user{
+  .user {
     grid-template-columns: 1fr;
-    &__img{
+
+    &__img {
       width: 50px;
       height: 50px;
     }

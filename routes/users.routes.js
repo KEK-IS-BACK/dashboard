@@ -1,6 +1,6 @@
 const {Router} = require('express')
 const auth = require('../middleware/auth.middleware')
-const innerUser = require('../models/innerUser')
+const User = require('../models/User')
 const {body, validationResult} = require("express-validator");
 
 const router = Router()
@@ -12,9 +12,9 @@ router.post(
   async (require, response) => {
     try {
       const {fullName, aboutMe, phone, place} = require.body
-      const {user} = require
+      const {profile} = require
 
-      const candidate = new innerUser({fullName, aboutMe, phone, place, owner: user.userId})
+      const candidate = new User({fullName, aboutMe, phone, place, owner: profile.profileId})
 
       await candidate.save()
 
@@ -28,14 +28,14 @@ router.post(
 router.get('/', auth,
   async (require, response) => {
     try {
-      const {user} = require
+      const {profile} = require
 
-      const innerUsers = await innerUser.find(
-        {owner: user.userId},
+      const users = await User.find(
+        {owner: profile.profileId},
         ['fullName', 'aboutMe', 'phone', 'place']
       )
 
-      response.json([...innerUsers])
+      response.json([...users])
     } catch (e) {
       response.status(500).json({message: 'Внутренняя ошибка сервера'})
     }
@@ -47,7 +47,7 @@ router.delete('/:id',
   async (request, response) => {
 
     try {
-      await innerUser.findByIdAndDelete(request.params.id)
+      await User.findByIdAndDelete(request.params.id)
 
       response.json({message: 'Пользователь удален'})
     } catch (e) {
@@ -79,7 +79,7 @@ router.put('/update/:id',
       const {fullName, aboutMe, phone, place} = request.body
 
 
-      await innerUser.findOneAndUpdate({_id: userId}, {fullName, aboutMe, phone, place})
+      await User.findOneAndUpdate({_id: userId}, {fullName, aboutMe, phone, place})
 
       response.json({message: 'Пользователь обновлен'})
     } catch (e) {

@@ -1,15 +1,14 @@
 import * as axios from "axios";
 
-
 let instanceWithToken = setInstanceWithToken()
 
 function setInstanceWithToken(token = null) {
-  const userToken = token || localStorage.getItem('userToken')
+  const profileToken = token || localStorage.getItem('profileToken')
 
   return axios.create({
     baseURL: '/api/',
     headers: {
-      'Authorization': 'Bearer ' + userToken
+      'Authorization': 'Bearer ' + profileToken
     }
   })
 }
@@ -28,7 +27,7 @@ export const authApi = {
       const response = await axios.post('api/auth/login', {email, password})
 
       if (response.status === 200) {
-        localStorage.setItem('userToken', response.data.token)
+        localStorage.setItem('profileToken', response.data.token)
         instanceWithToken = setInstanceWithToken(response.data.token)
       }
 

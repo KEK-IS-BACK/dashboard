@@ -1,14 +1,22 @@
-import './WidgetUsers.scss'
-import {useState} from "react";
+import React, {useState} from "react";
 import UserItem from "./UserItem/UserItem";
 import {getUsers, selectActiveUser} from "../../../redux/usersReducer";
 import {connect} from 'react-redux'
-import {getDefaultAvatar} from "../../../redux/selectors";
+import {getActiveUser, getDefaultAvatar, getSettingsPageUsers} from "../../../redux/selectors";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
+import './WidgetUsers.scss'
 
 const WidgetUsers = props => {
-  const {users, activeUser, selectActiveUser, defaultAvatar, history, className} = props
+  const {
+    users,
+    activeUser,
+    selectActiveUser,
+    defaultAvatar,
+    history,
+    className
+  } = props
+
   const [show, setShow] = useState(false)
 
   const usersElements = users.map((user, index) => <UserItem key={index}
@@ -18,7 +26,6 @@ const WidgetUsers = props => {
                                                              selectActiveUser={selectActiveUser}
                                                              activeUserId={activeUser && activeUser._id}
                                                              history={history}/>)
-
   const activeUserHandler = () => {
     history.push('/settings')
   }
@@ -27,20 +34,16 @@ const WidgetUsers = props => {
     <div className={`widgetUsers ${className || ''}`}>
       <div className='widgetUsers__wrap'>
         {activeUser
-          ?
-          <div className='widgetUsers__activeUser' onClick={activeUserHandler}>
-            <div className='widgetUsers__activeUserImg'>
-              <img src={activeUser.img || defaultAvatar} alt=""/>
+          ? <div className='widgetUsers__activeUser' onClick={activeUserHandler}>
+              <div className='widgetUsers__activeUserImg'>
+                <img src={activeUser.img || defaultAvatar} alt="Аватар"/>
+              </div>
+              {activeUser.fullName}
             </div>
-            {activeUser.fullName}
-          </div>
-          :
-          <div className='widgetUsers__activeUser'>Активный пользователь не выбран</div>
+          : <div className='widgetUsers__activeUser'>Активный пользователь не выбран</div>
         }
         <div className='widgetUsers__btnShow'
-             onClick={() => {
-               setShow(!show)
-             }}>
+             onClick={() => {setShow(!show)}}>
           ▼
         </div>
       </div>
@@ -52,6 +55,8 @@ const WidgetUsers = props => {
 }
 
 const mapStateToProps = state => ({
+  users: getSettingsPageUsers(state),
+  activeUser: getActiveUser(state),
   defaultAvatar: getDefaultAvatar(state)
 })
 

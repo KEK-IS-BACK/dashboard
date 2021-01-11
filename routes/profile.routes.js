@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const User = require('../models/User')
+const Profile = require('../models/Profile')
 const auth = require('../middleware/auth.middleware')
 
 const router = Router()
@@ -10,15 +10,15 @@ router.get(
   auth,
   async (request, response) => {
     try {
-      const {user} = request
+      const {profile} = request
 
-      const userData = await User.findOne({_id: user.userId})
+      const profileData = await Profile.findOne({_id: profile.profileId})
 
-      if(!userData) {
+      if(!profileData) {
         return response.status(400).json({message: 'Пользователь не найден'})
       }
 
-      const {fullName, _id: id} = userData
+      const {fullName, _id: id} = profileData
 
       return response.json({fullName, id})
     } catch (e) {

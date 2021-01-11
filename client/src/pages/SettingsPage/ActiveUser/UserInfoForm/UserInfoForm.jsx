@@ -60,7 +60,9 @@ const UserInfoForm = props => {
                     value='Сохранить'/>
             <Button type='button'
                     className='updateUserForm__btnCancel'
-                    onClick={() => {setIsEditMod(false)}}
+                    onClick={() => {
+                      setIsEditMod(false)
+                    }}
                     value='Отмена'/>
           </div>
         </div>

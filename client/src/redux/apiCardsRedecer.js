@@ -8,7 +8,7 @@ import axios from "axios";
 
 const SET_API_RESULT = 'dashboard/apiCardsReducer/SET_API_RESULT'
 const SET_API_CARDS = 'dashboard/apiCardsReducer/SET_API_CARDS'
-const SET_CURRENT_API = 'dashboard/apiCardsReducer/SET_CURRENT_API'
+const SET_ACTIVE_API_CARD = 'dashboard/apiCardsReducer/SET_ACTIVE_API_CARD'
 
 
 const initialState = {
@@ -59,7 +59,7 @@ const initialState = {
   ],
   currentApiCards: [],
   apiResult: null,
-  currentApi: {}
+  activeApiCard: {}
 }
 
 const apiCardsReducer = (state = initialState, action) => {
@@ -74,13 +74,13 @@ const apiCardsReducer = (state = initialState, action) => {
         ...state,
         apiResult: action.data
       }
-    case SET_CURRENT_API:
+    case SET_ACTIVE_API_CARD:
       const stateCopy = {...state}
       const apiCard = stateCopy.allApiCards.find(item => item.id === action.id)
 
       return {
         ...state,
-        currentApi: apiCard
+        activeApiCard: apiCard
       }
     default :
       return state
@@ -89,7 +89,7 @@ const apiCardsReducer = (state = initialState, action) => {
 
 export const setApiCards = cards => ({type: SET_API_CARDS, cards})
 export const setApiResult = data => ({type: SET_API_RESULT, data})
-export const setCurrentApi = id => ({type: SET_CURRENT_API, id})
+export const setActiveApiCard = id => ({type: SET_ACTIVE_API_CARD, id})
 
 export const makeApiRequest = httpRequest => async dispatch => {
   try {
@@ -97,8 +97,7 @@ export const makeApiRequest = httpRequest => async dispatch => {
     const response = await axios.get(httpRequest)
 
     dispatch(setApiResult(response.data))
-  } catch (e) {
-  }
+  } catch (e) {}
 
 }
 export const selectRandomApiCards = () => (dispatch, getState) => {
@@ -107,11 +106,11 @@ export const selectRandomApiCards = () => (dispatch, getState) => {
   let indexes = [] // Массив индексов нужен для исключения повторений
   let randomApiCards = []
 
-  for(let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i++) { // Генерирует три случайных числа
 
     let randIndex = Math.floor(Math.random() * ((state.apiCards.allApiCards.length - 1) + 1)); // Рандомное число от 0 до "количество карточек"
 
-    if(indexes.indexOf(randIndex) === -1) {
+    if (indexes.indexOf(randIndex) === -1) {
       indexes.push(randIndex)
       randomApiCards.push(state.apiCards.allApiCards[randIndex])
     } else {
