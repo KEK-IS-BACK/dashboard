@@ -4,7 +4,7 @@ import Input from "../common/Input/Input";
 import Button from "../common/Button/Button";
 
 const CreateUser = props => {
-  const {createUser} = props
+  const {createUser, className} = props
 
   const [form, setForm] = useState({
     fullName: '',
@@ -32,7 +32,7 @@ const CreateUser = props => {
   }
 
   return (
-    <div className='createUser'>
+    <div className={`createUser ${className}`}>
       <h1 className='subtitle createUser__title'>Добавить пользователя</h1>
       <form onSubmit={submitHandler}>
         <div className='createUser__body'>
@@ -65,7 +65,7 @@ const CreateUser = props => {
           <label className='createUser__label'>
             <div className='createUser__property'>Город:</div>
             <Input type="text"
-                   placeholder='Россия, г.Орел'
+                   placeholder='Орел'
                    name='place'
                    value={form.place}
                    onChange={onChangeHandler}
@@ -76,6 +76,7 @@ const CreateUser = props => {
                     className='createUser__btnSubmit'
                     value='Создать пользователя'/>
             <Button type='button'
+                    className='createUser__btnClear'
                     value='Очистить поля'
                     onClick={() =>
                       setForm({

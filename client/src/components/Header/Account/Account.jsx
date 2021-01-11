@@ -7,7 +7,7 @@ import {getOwnerFullName} from "../../../redux/selectors";
 
 
 const Account = props => {
-  const {logout, ownerFullName} = props
+  const {logout, ownerFullName, className} = props
   const array = ownerFullName.split(' ')
   let shortName = array
 
@@ -20,7 +20,7 @@ const Account = props => {
   }
 
   return (
-    <div className='account'>
+    <div className={`account ${className}`}>
       <div className="account__fullName">{shortName}</div>
       <NavLink to='/'
                onClick={logout}

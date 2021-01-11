@@ -2,11 +2,12 @@
 
 .header {
   width: 100%;
-  background-color: #2B3245;
+  background-color: $defaultColor;
 
   &__body {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
     height: 80px;
   }
@@ -22,8 +23,40 @@
       color: $whiteColor;
     }
 
-    &_registration{
+    &_registration {
       margin: 0 15px 0 0;
     }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header {
+    &__body {
+      height: unset;
+    }
+    &__logo{
+      margin: 15px 0 0 0;
+    }
+
+    &__users {
+      width: 100% !important;
+    }
+
+    &__buttons {
+      justify-self: center;
+      margin: 0 0 15px;
+    }
+
+    &__account{
+      margin: 0 0 15px 0;
+    }
+  }
+
+  .header__body_authorized {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 15px;
   }
 }

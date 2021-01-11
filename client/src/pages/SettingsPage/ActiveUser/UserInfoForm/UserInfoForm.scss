@@ -1,0 +1,18 @@
+.updateUserForm {
+  overflow-y: auto;
+
+  &__body {
+    display: grid;
+    gap: 15px;
+  }
+
+  &__buttons{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__btnSubmit {
+    margin: 0 15px 0;
+  }
+}

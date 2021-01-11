@@ -26,7 +26,7 @@ const SettingsPage = props => {
               {usersElements}
             </div>
           </div>
-          <CreateUser createUser={createUser}/>
+          <CreateUser createUser={createUser} className='settingsPage__createUser'/>
         </div>
 
 
